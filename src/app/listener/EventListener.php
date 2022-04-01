@@ -102,7 +102,7 @@ class EventListener extends Injectable
                 if (true === $acl->isAllowed($role, $controller, $action)) {
                     echo "Access Granted";
                 } else {
-                    echo "Access Denied";
+                    echo $this->locale->_("Access Denied");
                     die();
                 }
             } catch(Exception $e) {

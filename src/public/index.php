@@ -4,6 +4,7 @@
 // $_SERVER["REQUEST_URI"] = str_replace("/phalt/","/",$_SERVER["REQUEST_URI"]);
 // $_GET["_url"] = "/";
 require_once"../vendor/autoload.php";
+
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
@@ -20,7 +21,7 @@ use Phalcon\Escaper;
 use Phalcon\Logger;
 use Phalcon\Logger\Adapter\Stream as ls;
 use Phalcon\Events\Manager as EventManager;
-
+use App\Components\Locale;
 
 
 
@@ -38,6 +39,7 @@ $loader->registerDirs(
         APP_PATH . "/controllers/",
         APP_PATH . "/models/",
         APP_PATH . "/listener/",
+        APP_PATH . "/messages/"
     ]
 );
 
@@ -140,6 +142,14 @@ $container->set(
     }
 );
 
+// $container->set(
+//     'locale', 
+   
+
+//         (new Locale())->getTranslator();
+    
+// );
+$container->set('locale', (new Locale())->getTranslator());
 
 
 
