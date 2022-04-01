@@ -3,6 +3,7 @@
 // echo "<pre>"; print_r($_SERVER); die;
 // $_SERVER["REQUEST_URI"] = str_replace("/phalt/","/",$_SERVER["REQUEST_URI"]);
 // $_GET["_url"] = "/";
+require_once"../vendor/autoload.php";
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
@@ -19,6 +20,7 @@ use Phalcon\Escaper;
 use Phalcon\Logger;
 use Phalcon\Logger\Adapter\Stream as ls;
 use Phalcon\Events\Manager as EventManager;
+
 
 
 

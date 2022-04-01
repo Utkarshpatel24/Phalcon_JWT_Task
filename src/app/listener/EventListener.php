@@ -98,7 +98,7 @@ class EventListener extends Injectable
                 $validator = new Validator($tokenObject, 100);
                 $validator->ValidateExpiration($expires);
                 $claims = $tokenObject->getClaims()->getPayload();
-                $role = $claims['sub'];
+                $role = $claims['role'];
                 if (true === $acl->isAllowed($role, $controller, $action)) {
                     echo "Access Granted";
                 } else {

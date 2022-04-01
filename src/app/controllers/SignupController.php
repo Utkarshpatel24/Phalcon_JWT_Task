@@ -6,6 +6,10 @@ use Phalcon\Security\JWT\Signer\Hmac;
 use Phalcon\Security\JWT\Token\Parser;
 use Phalcon\Security\JWT\Validator;
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+
 
 class SignupController extends Controller
 {
@@ -26,11 +30,13 @@ class SignupController extends Controller
     {
         $postdata = $this->request->getPost();
         // print_r($postdata);
-        $token = $this->getToken($postdata['role']);
+        // $token = $this->getToken($postdata['role']);
+        $token = $this->getTokenByFirebaseAction($postdata['name'], $postdata['role']);
         $user = new Users();
         $user->assign(
             $this->request->getPost(),
             [
+                'name',
                 'role',
                 'email',
                 'password'
@@ -81,5 +87,23 @@ class SignupController extends Controller
         // The token
         // echo $tokenObject->getToken();
         return $tokenObject->getToken();
+    }
+
+    public function getTokenByFirebaseAction($name, $role)
+    {
+        $key = "example_key";
+        $payload = array(
+            "iss" => "http://example.org",
+            "aud" => "http://example.com",
+            "iat" => 1356999524,
+            "nbf" => 1357000000,
+            "name" => $name,
+            "role" => $role
+        );
+        $token = JWT::encode($payload, $key, 'HS256');
+        // echo $token;
+        // die();
+        return $token;
+        
     }
 }
